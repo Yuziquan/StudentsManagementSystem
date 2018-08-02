@@ -2,14 +2,14 @@
 
 ### 一、Demo功能
 
->  通过Spring Boot搭建“实现对学生信息的简单CRUD操作”的Web应用程序。其中学生信息包括：学号、姓名、性别、年龄。
+>  通过Spring Boot搭建“实现对学生信息CRUD操作”的简单Web应用程序。其中学生信息包括：学号、姓名、性别、年龄，也实现了利用AOP处理请求、全局统一异常处理、单元测试等。
 
 <br/>
 
 ***
 ### 二、该Demo的项目结构
 
-![1](https://github.com/Yuziquan/StudentsManagementSystem/blob/master/Screenshots/project_structure.png)
+![1]()
 
 <br/>
 

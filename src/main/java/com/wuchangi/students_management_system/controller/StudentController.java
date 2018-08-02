@@ -7,13 +7,19 @@ package com.wuchangi.students_management_system.controller;
  * @create: 2018-08-01-22-17
  **/
 
+import com.wuchangi.students_management_system.entity.Result;
 import com.wuchangi.students_management_system.entity.Student;
 import com.wuchangi.students_management_system.service.StudentService;
+import com.wuchangi.students_management_system.util.CreateResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
+import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * 一个控制器类
+ */
 @RestController
 public class StudentController
 {
@@ -30,20 +36,19 @@ public class StudentController
     }
 
     /**
-     * 新增一个学生的信息
-     * @param number
-     * @param name
-     * @param sex
-     * @param age
+     * 新增一个学生的信息（实现了表单验证：不允许添加未成年的学生信息）
+     * @param student
      * @return
      */
     @PostMapping(value = "/create")
-    public Student addStudent(@RequestParam("number") String number,
-                              @RequestParam("name") String name,
-                              @RequestParam("sex") String sex,
-                              @RequestParam("age") Integer age)
+    public Result<Student> addStudent(@Valid Student student, BindingResult bindingResult)
     {
-        return studentService.addStudent(number, name, sex, age);
+        if(bindingResult.hasErrors())
+        {
+            return CreateResultUtil.createErrorResult(1, bindingResult.getFieldError().getDefaultMessage());
+        }
+
+        return CreateResultUtil.createSuccessResult(studentService.addStudent(student.getNumber(), student.getName(), student.getSex(), student.getAge()));
     }
 
     /**
@@ -82,6 +87,15 @@ public class StudentController
     public void deleteStudent(@PathVariable("num") String number)
     {
         studentService.deleteStudent(number);
+    }
+
+    /**
+     * 通过学号获取该学生的信息，并通过其年龄判断其具体身份
+     */
+    @GetMapping(value = "/student/getAge/{num}")
+    public void getAge(@PathVariable("num") String number) throws Exception
+    {
+        studentService.getAge(number);
     }
 
 }

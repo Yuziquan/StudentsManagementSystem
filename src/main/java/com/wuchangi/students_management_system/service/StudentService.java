@@ -8,6 +8,8 @@ package com.wuchangi.students_management_system.service;
  **/
 
 import com.wuchangi.students_management_system.entity.Student;
+import com.wuchangi.students_management_system.enums.ResultEnum;
+import com.wuchangi.students_management_system.exception.StudentException;
 import com.wuchangi.students_management_system.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * 一个处理业务逻辑的服务类
+ */
 @Service
 public class StudentService
 {
@@ -138,6 +143,28 @@ public class StudentService
         student2.setSex("女");
         student2.setAge(20);
         studentRepository.save(student2);
+    }
+
+    /**
+     * 通过学号获取该学生的信息，并通过其年龄判断其具体身份
+     * @param number
+     * @throws Exception
+     */
+    public void getAge(String number) throws Exception
+    {
+        Student student =studentRepository.findById(number).orElse(null);
+        Integer age = student.getAge();
+
+        if(age <= 20)
+        {
+            //返回"可能还在上高中" code=100
+            throw new StudentException(ResultEnum.HIGH_SCHOOL);
+        }
+        else if(age > 20 && age < 24)
+        {
+            //返回"可能还在上大学" code=101
+            throw new StudentException(ResultEnum.COLLEGE);
+        }
     }
 
 }
