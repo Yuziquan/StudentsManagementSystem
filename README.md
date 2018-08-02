@@ -9,7 +9,7 @@
 ***
 ### 二、该Demo的项目结构
 
-![1]()
+![1](https://github.com/Yuziquan/StudentsManagementSystem/blob/master/Screenshots/project_structure.png)
 
 <br/>
 
