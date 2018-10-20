@@ -1,4 +1,7 @@
 ## StudentsManagementSystem
+[![StudentsManagementSystem](https://img.shields.io/badge/StudentsManagementSystem-v1.0.0-brightgreen.svg)](https://github.com/Yuziquan/StudentsManagementSystem)
+[![license](https://img.shields.io/packagist/l/doctrine/orm.svg)](
+https://github.com/Yuziquan/StudentsManagementSystem/blob/master/LICENSE)
 
 ### 一、Demo功能
 
